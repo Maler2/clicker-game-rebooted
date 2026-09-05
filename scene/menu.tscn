@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://bccy4xnwv62ap"]
+
+[ext_resource type="Script" uid="uid://bj2e583eiy6p6" path="res://script/menu.gd" id="1_e5g8k"]
+
+[node name="menu" type="Control" unique_id=1416774771]
+layout_mode = 3
+anchor_left = 0.333
+anchor_right = 0.66700006
+anchor_bottom = 1.0
+offset_left = 0.3840027
+offset_right = -0.3840332
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e5g8k")
+
+[node name="panel" type="Panel" parent="." unique_id=1009219129]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="vboxcontainer" type="VBoxContainer" parent="panel" unique_id=1699518742]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="close" type="HBoxContainer" parent="panel/vboxcontainer" unique_id=86987333]
+layout_mode = 2
+
+[node name="button" type="Button" parent="panel/vboxcontainer/close" unique_id=1831763460]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+
+[node name="seperator" type="HBoxContainer" parent="panel/vboxcontainer" unique_id=80872325]
+layout_mode = 2
+
+[node name="label" type="Label" parent="panel/vboxcontainer/seperator" unique_id=1598741918]
+custom_minimum_size = Vector2(384, 24)
+layout_mode = 2
+text = "
+
+
+
+
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="setting" type="HBoxContainer" parent="panel/vboxcontainer" unique_id=458813022]
+layout_mode = 2
+
+[node name="button" type="Button" parent="panel/vboxcontainer/setting" unique_id=1480631669]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "SETTING"
+
+[node name="quit" type="HBoxContainer" parent="panel/vboxcontainer" unique_id=1390844890]
+layout_mode = 2
+
+[node name="button" type="Button" parent="panel/vboxcontainer/quit" unique_id=1809262544]
+custom_minimum_size = Vector2(0, 128)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "QUIT"

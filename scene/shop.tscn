@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://ykklgg2t1gli"]
+
+[ext_resource type="Script" uid="uid://b1jbshl4qvgjr" path="res://script/shop.gd" id="1_iuafe"]
+
+[node name="shop" type="Control" unique_id=314188110]
+layout_mode = 3
+anchor_right = 0.22200002
+anchor_bottom = 1.0
+offset_right = 0.25598145
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iuafe")
+
+[node name="panel" type="Panel" parent="." unique_id=900110999]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="scrollcontainer" type="ScrollContainer" parent="panel" unique_id=1995902416]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="vboxcontainer" type="VBoxContainer" parent="panel/scrollcontainer" unique_id=839079140]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="close" type="HBoxContainer" parent="panel/scrollcontainer/vboxcontainer" unique_id=1051392041]
+layout_mode = 2
+
+[node name="button" type="Button" parent="panel/scrollcontainer/vboxcontainer/close" unique_id=1291520131]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+
+[node name="addpoint" type="HBoxContainer" parent="panel/scrollcontainer/vboxcontainer" unique_id=1968083831]
+layout_mode = 2
+
+[node name="idlabel" type="Label" parent="panel/scrollcontainer/vboxcontainer/addpoint" unique_id=745432474]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "placeholder: %any"
+
+[node name="button" type="Button" parent="panel/scrollcontainer/vboxcontainer/addpoint" unique_id=2043296452]
+layout_mode = 2
+text = "BUY"
+
+[node name="auto" type="HBoxContainer" parent="panel/scrollcontainer/vboxcontainer" unique_id=1771179269]
+layout_mode = 2
+
+[node name="idlabel" type="Label" parent="panel/scrollcontainer/vboxcontainer/auto" unique_id=1018542848]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "placeholder: %any"
+
+[node name="button" type="Button" parent="panel/scrollcontainer/vboxcontainer/auto" unique_id=1304492580]
+layout_mode = 2
+text = "BUY"
