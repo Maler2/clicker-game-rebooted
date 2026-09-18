@@ -47,6 +47,22 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "AUDIO"
 
+[node name="reset" type="HBoxContainer" parent="panel/vboxcontainer" unique_id=950120768]
+layout_mode = 2
+
+[node name="button" type="Button" parent="panel/vboxcontainer/reset" unique_id=1332875247]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "RESET"
+
+[node name="resetsetting" type="HBoxContainer" parent="panel/vboxcontainer" unique_id=1992791370]
+layout_mode = 2
+
+[node name="button" type="Button" parent="panel/vboxcontainer/resetsetting" unique_id=332051031]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "RESET SETTING"
+
 [node name="other" type="HBoxContainer" parent="panel/vboxcontainer" unique_id=1846815629]
 layout_mode = 2
 
@@ -55,11 +71,3 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "OTHER
 "
-
-[node name="reset" type="HBoxContainer" parent="panel/vboxcontainer" unique_id=950120768]
-layout_mode = 2
-
-[node name="button" type="Button" parent="panel/vboxcontainer/reset" unique_id=1332875247]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "RESET"

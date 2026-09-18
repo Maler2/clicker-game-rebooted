@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://cu0locohl5tr"]
+
+[ext_resource type="Script" uid="uid://d06c6nqm18nw4" path="res://script/audio.gd" id="1_7cf6j"]
+
+[node name="audio" type="Control" unique_id=1416774771]
+layout_mode = 3
+anchor_left = 0.333
+anchor_right = 0.66700006
+anchor_bottom = 1.0
+offset_left = 0.3840027
+offset_right = -0.3840332
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7cf6j")
+
+[node name="panel" type="Panel" parent="." unique_id=1009219129]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="vboxcontainer" type="VBoxContainer" parent="panel" unique_id=1699518742]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="close" type="HBoxContainer" parent="panel/vboxcontainer" unique_id=86987333]
+layout_mode = 2
+
+[node name="button" type="Button" parent="panel/vboxcontainer/close" unique_id=1831763460]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+
+[node name="master" type="HBoxContainer" parent="panel/vboxcontainer" unique_id=1642237845]
+layout_mode = 2
+
+[node name="label" type="Label" parent="panel/vboxcontainer/master" unique_id=1234371813]
+custom_minimum_size = Vector2(33, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Master:"
+vertical_alignment = 1
+
+[node name="slider" type="HSlider" parent="panel/vboxcontainer/master" unique_id=1103772875]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="sfx" type="HBoxContainer" parent="panel/vboxcontainer" unique_id=1340034711]
+layout_mode = 2
+
+[node name="label" type="Label" parent="panel/vboxcontainer/sfx" unique_id=463567627]
+custom_minimum_size = Vector2(33, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "sfx:"
+vertical_alignment = 1
+
+[node name="slider" type="HSlider" parent="panel/vboxcontainer/sfx" unique_id=1447192388]
+layout_mode = 2
+size_flags_horizontal = 3

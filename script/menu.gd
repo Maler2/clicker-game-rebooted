@@ -25,6 +25,7 @@ func setting_btn_pressed() -> void:
 func quit_btn_pressed() -> void:
 	get_window().borderless = true # failsafe
 	Global.saving()
+	Global.preference_saving()
 	anim_play_quit.emit()
 	await get_tree().create_timer(1).timeout
 	get_tree().quit()

@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Global="*uid://by0nhktim5aqv"
+PopupGlobal="*uid://cfa1vwudb20m4"
 
 [display]
 
