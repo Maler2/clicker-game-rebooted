@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://dfjrcga0fnw8r"]
+
+[ext_resource type="Script" uid="uid://bcmlhufcj1eqh" path="res://script/other.gd" id="1_l2hr5"]
+
+[node name="other" type="Control" unique_id=356311649]
+layout_mode = 3
+anchor_left = 0.333
+anchor_right = 0.66700006
+anchor_bottom = 1.0
+offset_left = -0.23999023
+offset_right = -1.7600708
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(213, 360)
+script = ExtResource("1_l2hr5")
+
+[node name="panel" type="Panel" parent="." unique_id=1668457412]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="vboxcontainer" type="VBoxContainer" parent="panel" unique_id=122222493]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="close" type="HBoxContainer" parent="panel/vboxcontainer" unique_id=93091413]
+layout_mode = 2
+
+[node name="button" type="Button" parent="panel/vboxcontainer/close" unique_id=77629817 groups=["hover"]]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "X"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="panel/vboxcontainer" unique_id=616830591]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="panel/vboxcontainer/HBoxContainer" unique_id=833150490]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Dark Mode:"
+vertical_alignment = 1
+
+[node name="CheckButton" type="CheckButton" parent="panel/vboxcontainer/HBoxContainer" unique_id=904747286]
+layout_mode = 2

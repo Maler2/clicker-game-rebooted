@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cfa1vwudb20m4"]
 
 [ext_resource type="Script" uid="uid://dpgwdgysyrq6v" path="res://script/popup.gd" id="1_56vfc"]
+[ext_resource type="Texture2D" uid="uid://doukdr3id375l" path="res://assets/ui/round-white.png" id="2_64wbc"]
 
 [node name="popup" type="Control" unique_id=525504534]
 top_level = true
@@ -30,20 +31,19 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="bg" type="ColorRect" parent="Textlabel" unique_id=640944647]
+[node name="NinePatchRect" type="NinePatchRect" parent="Textlabel" unique_id=693707752]
+show_behind_parent = true
 layout_mode = 1
-anchors_preset = -1
-anchor_left = -1.0
-anchor_top = -7.0000005
-anchor_right = 2.0
-anchor_bottom = 3.1250002
-offset_left = 384.0
-offset_top = 448.00003
-offset_right = -384.0
-offset_bottom = -136.00002
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.39215687, 0.39215687, 0.39215687, 0.39215687)
+texture = ExtResource("2_64wbc")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=732618920]
 visible = false

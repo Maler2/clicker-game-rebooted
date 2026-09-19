@@ -7,10 +7,11 @@ layout_mode = 3
 anchor_left = 0.333
 anchor_right = 0.66700006
 anchor_bottom = 1.0
-offset_left = 0.3840027
-offset_right = -0.3840332
+offset_left = -0.23999023
+offset_right = -1.7600708
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(213, 360)
 script = ExtResource("1_xthoy")
 
 [node name="panel" type="Panel" parent="." unique_id=1009219129]
@@ -18,6 +19,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -34,7 +39,7 @@ size_flags_vertical = 3
 [node name="close" type="HBoxContainer" parent="panel/vboxcontainer" unique_id=86987333]
 layout_mode = 2
 
-[node name="button" type="Button" parent="panel/vboxcontainer/close" unique_id=1831763460]
+[node name="button" type="Button" parent="panel/vboxcontainer/close" unique_id=1831763460 groups=["hover"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "X"
@@ -42,7 +47,7 @@ text = "X"
 [node name="audio" type="HBoxContainer" parent="panel/vboxcontainer" unique_id=276990969]
 layout_mode = 2
 
-[node name="button" type="Button" parent="panel/vboxcontainer/audio" unique_id=1158262019]
+[node name="button" type="Button" parent="panel/vboxcontainer/audio" unique_id=1158262019 groups=["hover"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "AUDIO"
@@ -50,23 +55,15 @@ text = "AUDIO"
 [node name="reset" type="HBoxContainer" parent="panel/vboxcontainer" unique_id=950120768]
 layout_mode = 2
 
-[node name="button" type="Button" parent="panel/vboxcontainer/reset" unique_id=1332875247]
+[node name="button" type="Button" parent="panel/vboxcontainer/reset" unique_id=1332875247 groups=["hover"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "RESET"
 
-[node name="resetsetting" type="HBoxContainer" parent="panel/vboxcontainer" unique_id=1992791370]
-layout_mode = 2
-
-[node name="button" type="Button" parent="panel/vboxcontainer/resetsetting" unique_id=332051031]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "RESET SETTING"
-
 [node name="other" type="HBoxContainer" parent="panel/vboxcontainer" unique_id=1846815629]
 layout_mode = 2
 
-[node name="button" type="Button" parent="panel/vboxcontainer/other" unique_id=1732681577]
+[node name="button" type="Button" parent="panel/vboxcontainer/other" unique_id=1732681577 groups=["hover"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "OTHER

@@ -58,7 +58,7 @@ func auto_button_pressed() -> void:
 
 func luck_btn() -> void:
 	if Global.point >= Global.luck_cost:
-		if Global.luck_float < Global.luck_float_max:
+		if Global.luck_float <= Global.luck_float_max:
 			PopupGlobal.popup("MAXED!")
 		else:
 			Global.point -= Global.luck_cost

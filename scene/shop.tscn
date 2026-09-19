@@ -6,9 +6,10 @@
 layout_mode = 3
 anchor_right = 0.22200002
 anchor_bottom = 1.0
-offset_right = 0.25598145
+offset_right = -0.16003418
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(142, 360)
 script = ExtResource("1_iuafe")
 
 [node name="panel" type="Panel" parent="." unique_id=900110999]
@@ -16,6 +17,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -38,7 +43,7 @@ size_flags_vertical = 3
 [node name="close" type="HBoxContainer" parent="panel/scrollcontainer/vboxcontainer" unique_id=1051392041]
 layout_mode = 2
 
-[node name="button" type="Button" parent="panel/scrollcontainer/vboxcontainer/close" unique_id=1291520131]
+[node name="button" type="Button" parent="panel/scrollcontainer/vboxcontainer/close" unique_id=1291520131 groups=["hover"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "X"
@@ -51,7 +56,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "placeholder: %any"
 
-[node name="button" type="Button" parent="panel/scrollcontainer/vboxcontainer/addpoint" unique_id=2043296452]
+[node name="button" type="Button" parent="panel/scrollcontainer/vboxcontainer/addpoint" unique_id=2043296452 groups=["hover"]]
 layout_mode = 2
 text = "BUY"
 
@@ -63,7 +68,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "placeholder: %any"
 
-[node name="button" type="Button" parent="panel/scrollcontainer/vboxcontainer/auto" unique_id=1304492580]
+[node name="button" type="Button" parent="panel/scrollcontainer/vboxcontainer/auto" unique_id=1304492580 groups=["hover"]]
 layout_mode = 2
 text = "BUY"
 
@@ -75,6 +80,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "placeholder: %any"
 
-[node name="button" type="Button" parent="panel/scrollcontainer/vboxcontainer/luck" unique_id=393604714]
+[node name="button" type="Button" parent="panel/scrollcontainer/vboxcontainer/luck" unique_id=393604714 groups=["hover"]]
 layout_mode = 2
 text = "BUY"

@@ -10,8 +10,9 @@ signal setting_request
 @onready var quit_button: Button = $panel/vboxcontainer/quit/button
 
 func _ready() -> void:
+	panel.self_modulate = Color(1, 1, 1, 0.5)
 	visible = false
-	position.y = -648
+	position.y = -720
 	close_button.pressed.connect(close_btn_pressed)
 	quit_button.pressed.connect(quit_btn_pressed)
 	setting_button.pressed.connect(setting_btn_pressed)

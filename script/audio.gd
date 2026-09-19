@@ -2,6 +2,7 @@ extends Control
 
 signal close_request_audio
 
+@onready var panel: Panel = $panel
 @onready var master_slider: HSlider = $panel/vboxcontainer/master/slider
 @onready var close_button: Button = $panel/vboxcontainer/close/button
 @onready var sfx_slider: HSlider = $panel/vboxcontainer/sfx/slider
@@ -10,8 +11,9 @@ signal close_request_audio
 
 func _ready() -> void:
     Global.preference_loading()
+    panel.self_modulate = Color(1, 1, 1, 0.5)
     visible = false
-    position.y = -648
+    position.y = -720
     master_slider.value = Global.master_val
     sfx_slider.value = Global.sfx_val
     master_slider.value_changed.connect(master_slider_changed)

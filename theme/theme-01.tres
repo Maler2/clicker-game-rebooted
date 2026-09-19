@@ -1,0 +1,32 @@
+[gd_resource type="Theme" format=3 uid="uid://c28y7a3ypu4sc"]
+
+[ext_resource type="Texture2D" uid="uid://db1vdfujwoo8d" path="res://assets/ui/white.png" id="1_oqko2"]
+[ext_resource type="Texture2D" uid="uid://doukdr3id375l" path="res://assets/ui/round-white.png" id="2_rf37h"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mdr20"]
+texture = ExtResource("1_oqko2")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+axis_stretch_horizontal = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_engyn"]
+texture = ExtResource("2_rf37h")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+
+[resource]
+Button/constants/outline_size = 4
+Button/styles/hover = SubResource("StyleBoxTexture_mdr20")
+Button/styles/hover_pressed = SubResource("StyleBoxTexture_mdr20")
+Button/styles/normal = SubResource("StyleBoxTexture_mdr20")
+Button/styles/pressed = SubResource("StyleBoxTexture_mdr20")
+Label/constants/outline_size = 4
+Panel/styles/panel = SubResource("StyleBoxTexture_engyn")

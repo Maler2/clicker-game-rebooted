@@ -7,10 +7,11 @@ layout_mode = 3
 anchor_left = 0.333
 anchor_right = 0.66700006
 anchor_bottom = 1.0
-offset_left = 0.3840027
-offset_right = -0.3840332
+offset_left = -0.23999023
+offset_right = -1.7600708
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(213, 360)
 script = ExtResource("1_7cf6j")
 
 [node name="panel" type="Panel" parent="." unique_id=1009219129]
@@ -18,6 +19,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
 

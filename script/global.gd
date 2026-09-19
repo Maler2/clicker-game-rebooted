@@ -4,6 +4,7 @@ const save_path: String = "user://savefile.json"
 const preference_path: String = "user://preference.json"
 
 signal update_point
+signal theme_changed(dark_on: bool)
 
 var point: int = 0:
 	set(val):
@@ -38,15 +39,25 @@ var luck_cost: int = 100:
 var luck_float: float = 0.85
 var luck_float_max: float = 0.5
 
+@onready var light_theme: Theme = preload("res://theme/theme-01.tres")
+@onready var dark_theme: Theme = preload("res://theme/theme-01-black.tres")
+
 func _ready() -> void:
 	var auto_save_timer: Timer = Timer.new()
 	auto_save_timer.wait_time = 60.0
 	auto_save_timer.autostart = true
 	auto_save_timer.timeout.connect(saving)
 	add_child(auto_save_timer)
+	get_tree().node_added.connect(node_added)
+
+	for node in get_tree().get_nodes_in_group("hover"):
+		if node is Button:
+			setup_btn_hover(node)
 
 var master_val: float = 100.0
 var sfx_val: float = 100.0
+
+var dark_mode: bool = false
 
 func saving() -> void:
 	var data: Dictionary = {
@@ -91,7 +102,8 @@ func loading() -> void:
 func preference_saving() -> void:
 	var data: Dictionary = {
 		"master_val": master_val,
-		"sfx_val": sfx_val
+		"sfx_val": sfx_val,
+		"dark_mode": dark_mode
 	}
 
 	var json_string: String = JSON.stringify(data)
@@ -107,7 +119,7 @@ func preference_loading() -> void:
 
 	var file: FileAccess = FileAccess.open(preference_path, FileAccess.READ)
 	if file:
-		var json_string: String = file.get_as_text()
+		var json_string: String = file.get_line()
 		file.close()
 
 		var data: Variant = JSON.parse_string(json_string)
@@ -115,6 +127,8 @@ func preference_loading() -> void:
 		if data is Dictionary:
 			master_val = data.get("master_val", master_val)
 			sfx_val = data.get("sfx_val", sfx_val)
+
+			dark_mode = data.get("dark_mode", dark_mode)
 			
 			var master_index: int = AudioServer.get_bus_index("Master")
 			if master_index != -1:
@@ -128,6 +142,14 @@ func preference_loading() -> void:
 				
 			print("PREFERENCE LOADED!")
 
+func apply_theme(dark_on: bool) -> void:
+	dark_mode = dark_on
+	preference_saving()
+	theme_changed.emit(dark_mode)
+
+func get_current_theme() -> Theme:
+	return dark_theme if dark_mode else light_theme
+
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		saving()
@@ -138,3 +160,12 @@ func reset_data() -> void:
 
 	OS.set_restart_on_exit(true)
 	get_tree().quit()
+
+func node_added(node: Node) -> void:
+	if node is Button and node.is_in_group("hover"):
+		setup_btn_hover(node)
+
+func setup_btn_hover(btn: Button) -> void:
+	btn.mouse_entered.connect(func(): btn.modulate = Color(1.5, 1.5, 1.5, 1))
+	btn.mouse_exited.connect(func(): btn.modulate = Color(1, 1, 1, 1))
+	

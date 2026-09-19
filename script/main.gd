@@ -13,10 +13,14 @@ extends Control
 @onready var click_sound: AudioStreamPlayer = $clicksound
 @onready var audio: Control = $audio
 @onready var debug_label: Label = $debuglabel
+@onready var other: Control = $other
+@onready var bg: TextureRect = $bg
 
 # variablenya
 var luck: float = randf_range(0, 1)
 var time_played: int = 0
+var end_screen: int = 1280
+@export var speed_scroll: int = 20
 
 # saat masuk ke gamenya?
 func _ready() -> void:
@@ -24,6 +28,9 @@ func _ready() -> void:
 	Global.loading()
 	print("Main Loaded!")
 	Global.preference_loading()
+	Global.theme_changed.connect(theme_change)
+
+	theme = Global.get_current_theme()
 	
 
 	# start
@@ -36,6 +43,7 @@ func _ready() -> void:
 	# global connect
 	Global.update_point.connect(upd_point)
 
+	# cek auto clicker
 	auto_timer_call()
 
 	# connect
@@ -51,6 +59,9 @@ func _ready() -> void:
 	shop.auto_timer_on.connect(auto_timer_call)
 	setting.audio_request.connect(open_audio)
 	audio.close_request_audio.connect(close_audio)
+	setting.other_request.connect(open_other)
+	other.close_request_other.connect(close_other)
+	other.apply.connect(theme_change)
 
 	# text
 	shop_button.text = "Shop"
@@ -58,7 +69,7 @@ func _ready() -> void:
 	# pivot (posisi dari node tersebut)
 	click_button.pivot_offset = Vector2(64, 64)
 	shop_button.pivot_offset = Vector2(64, 64)
-	self.pivot_offset = Vector2(576, 324)
+	self.pivot_offset = Vector2(640, 360)
 	menu_button.pivot_offset.x = 64
 
 	# tween (animasi)
@@ -68,6 +79,9 @@ func _ready() -> void:
 	shop_button.mouse_exited.connect(shop_btn_exited)
 	menu_button.mouse_entered.connect(menu_btn_entered)
 	menu_button.mouse_exited.connect(menu_btn_exited)
+
+	# hide or show
+	debug_label.visible = false
 
 	# timer
 	auto_timer.timeout.connect(auto_click_time)
@@ -82,6 +96,26 @@ func _ready() -> void:
 	pass
 	upd_point()
 
+func _process(delta: float) -> void:
+	debug_label_info()
+	if bg.position.x <= 0:
+		bg.position.x += speed_scroll * delta
+	else:
+		bg.position.x = -640
+
+func theme_change() -> void:
+	theme = Global.get_current_theme()
+
+func _input(event: InputEvent) -> void:
+	var f3_first: bool = event.is_action_pressed("f3_key") and Input.is_action_pressed("d_key")
+	var d_first: bool = event.is_action_pressed("d_key") and Input.is_action_pressed("f3_key")
+	
+	if f3_first or d_first:
+		if debug_label.visible:
+			debug_label.visible = false
+		else:
+			debug_label.visible = true
+
 func auto_timer_call() -> void:
 	if Global.auto_timer_point == 0:
 		print(auto_timer_call.get_method(), ": false")
@@ -91,7 +125,7 @@ func auto_timer_call() -> void:
 		auto_timer.start()
 
 func debug_label_info() -> void:
-	debug_label.text = "Chance: %.2f" % luck
+	debug_label.text = "Debug\nChance: %.2f\nbg pos: X %d Y %d" % [luck, bg.position.x, bg.position.y]
 
 # fungsi kustom
 func upd_point() -> void:
@@ -100,12 +134,15 @@ func upd_point() -> void:
 
 # fungsi tombol (click button)
 func _click_btn_pressed() -> void:
-	var tween: Tween = create_tween()
+	var tween: Tween = create_tween().set_parallel(true)
 	luck = randf_range(0, 1)
 	click_sound.pitch_scale = randf_range(0.9, 1.1)
 	click_sound.play()
 	tween.tween_property(click_button, "scale", Vector2(1.05, 1.05), 0.1)
-	tween.tween_property(click_button, "scale", Vector2(1.1, 1.1), 0.1)
+	tween.tween_property(click_button, "modulate", Color(1, 1, 1, 1), 0.1)
+
+	tween.chain().tween_property(click_button, "scale", Vector2(1.1, 1.1), 0.1)
+	tween.parallel().tween_property(click_button, "modulate", Color(2, 2, 2, 1), 0.1)
 	if luck >= Global.luck_float:
 		Global.point += (Global.add_point * 2)
 		PopupGlobal.popup("+", (Global.add_point * 2))
@@ -119,35 +156,45 @@ func _click_btn_pressed() -> void:
 # animasi
 func click_btn_entered() -> void:
 	var tween: Tween = create_tween()
+	var node: Node = click_button
 	click_sound.pitch_scale = randf_range(1.2, 1.3)
 	click_sound.play()
-	tween.tween_property(click_button, "scale", Vector2(1.1, 1.1), 0.3).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	tween.tween_property(node, "scale", Vector2(1.1, 1.1), 0.3).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 
 func click_btn_exited() -> void:
 	var tween: Tween = create_tween()
+	var node: Node = click_button
 	click_sound.pitch_scale = randf_range(0.8, 0.9)
 	click_sound.play()
-	tween.tween_property(click_button, "scale", Vector2(1.0, 1.0), 0.3).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	tween.tween_property(node, "scale", Vector2(1.0, 1.0), 0.3).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 
 func shop_btn_entered() -> void:
 	var tween: Tween = create_tween()
+	var node: Node = shop_button
 	click_sound.pitch_scale = randf_range(1.25, 1.35)
 	click_sound.play()
-	tween.tween_property(shop_button, "scale", Vector2(1.1, 1.1), 0.3).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	tween.tween_property(node, "scale", Vector2(1.1, 1.1), 0.3).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 
 func shop_btn_exited() -> void:
 	var tween: Tween = create_tween()
+	var node: Node = shop_button
 	click_sound.pitch_scale = randf_range(0.75, 0.85)
 	click_sound.play()
-	tween.tween_property(shop_button, "scale", Vector2(1.0, 1.0), 0.3).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	tween.tween_property(node, "scale", Vector2(1.0, 1.0), 0.3).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 
 func menu_btn_entered() -> void:
 	var tween: Tween = create_tween()
-	tween.tween_property(menu_button, "scale", Vector2(1.1, 1.1), 0.3).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	var node: Node = menu_button
+	click_sound.play()
+	tween.tween_property(node, "scale", Vector2(1.1, 1.1), 0.3).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 
 func menu_btn_exited() -> void:
 	var tween: Tween = create_tween()
-	tween.tween_property(menu_button, "scale", Vector2(1.0, 1.0), 0.3).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	var node: Node = menu_button
+	click_sound.pitch_scale = randf_range(0.65, 0.75)
+	click_sound.play()
+	tween.tween_property(node, "scale", Vector2(1.0, 1.0), 0.3).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+
 
 # buat loop
 func auto_click_time() -> void:
@@ -177,7 +224,7 @@ func menu_btn_pressed() -> void:
 func open_shop() -> void:
 	var tween := create_tween()
 	shop.visible = true
-	tween.tween_property(shop, "position", Vector2(256, 0), 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	tween.tween_property(shop, "position", Vector2(264, 0), 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 
 # tutup shop
 func close_shop() -> void:
@@ -189,12 +236,12 @@ func close_shop() -> void:
 func open_menu() -> void:
 	var tween := create_tween()
 	menu.visible = true
-	tween.tween_property(menu, "position", Vector2(384, 0), 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	tween.tween_property(menu, "position", Vector2(427, 0), 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 
 # tutup menu
 func close_menu() -> void:
 	var tween := create_tween()
-	tween.tween_property(menu, "position", Vector2(384, -648), 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
+	tween.tween_property(menu, "position", Vector2(427, -720), 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
 	tween.tween_callback(func(): menu.visible = false)
 
 # memainkan animasi keluar
@@ -208,17 +255,17 @@ func play_quit() -> void:
 func open_setting() -> void:
 	var tween: Tween = create_tween()
 	setting.visible = true
-	tween.tween_property(menu, "position", Vector2(384, -648), 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
+	tween.tween_property(menu, "position", Vector2(427, -720), 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
 	tween.tween_callback(func(): menu.visible = false)
-	tween.tween_property(setting, "position", Vector2(384, 0), 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	tween.tween_property(setting, "position", Vector2(427, 0), 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 
 # tutup setting
 func close_setting() -> void:
 	var tween: Tween = create_tween()
-	tween.tween_property(setting, "position", Vector2(384, -648), 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
+	tween.tween_property(setting, "position", Vector2(427, -720), 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
 	tween.tween_callback(func(): setting.visible = false)
 	menu.visible = true
-	tween.tween_property(menu, "position", Vector2(384, 0), 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	tween.tween_property(menu, "position", Vector2(427, 0), 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 
 # memainkan restart
 func play_restart() -> void:
@@ -228,13 +275,27 @@ func play_restart() -> void:
 func open_audio() -> void:
 	var tween: Tween = create_tween()
 	audio.visible = true
-	tween.tween_property(setting, "position", Vector2(384, -648), 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
+	tween.tween_property(setting, "position", Vector2(427, -720), 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
 	tween.tween_callback(func(): setting.visible = false)
-	tween.tween_property(audio, "position", Vector2(384, 0), 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	tween.tween_property(audio, "position", Vector2(427, 0), 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 
 func close_audio() -> void:
 	var tween: Tween = create_tween()
-	tween.tween_property(audio, "position", Vector2(384, -648), 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
+	tween.tween_property(audio, "position", Vector2(427, -720), 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
 	tween.tween_callback(func(): audio.visible = false)
 	setting.visible = true
-	tween.tween_property(setting, "position", Vector2(384, 0), 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	tween.tween_property(setting, "position", Vector2(427, 0), 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+
+func open_other() -> void:
+	var tween: Tween = create_tween()
+	other.visible = true
+	tween.tween_property(setting, "position", Vector2(427, -720), 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
+	tween.tween_callback(func(): setting.visible = false)
+	tween.tween_property(other, "position", Vector2(427, 0), 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+
+func close_other() -> void:
+	var tween: Tween = create_tween()
+	tween.tween_property(other, "position", Vector2(427, -720), 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN)
+	tween.tween_callback(func(): other.visible = false)
+	setting.visible = true
+	tween.tween_property(setting, "position", Vector2(427, 0), 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
