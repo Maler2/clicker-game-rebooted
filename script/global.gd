@@ -59,6 +59,8 @@ var sfx_val: float = 100.0
 
 var dark_mode: bool = false
 
+var bg_color: Color = Color(1.0, 1.0, 1.0)
+
 func saving() -> void:
 	var data: Dictionary = {
 		"point": point,
@@ -103,7 +105,8 @@ func preference_saving() -> void:
 	var data: Dictionary = {
 		"master_val": master_val,
 		"sfx_val": sfx_val,
-		"dark_mode": dark_mode
+		"dark_mode": dark_mode,
+		"bg_color": bg_color.to_html(false)
 	}
 
 	var json_string: String = JSON.stringify(data)
@@ -129,6 +132,11 @@ func preference_loading() -> void:
 			sfx_val = data.get("sfx_val", sfx_val)
 
 			dark_mode = data.get("dark_mode", dark_mode)
+
+			var saved_bg = data.get("bg_color", null)
+
+			if saved_bg != null:
+				bg_color = Color.html((str(saved_bg)))
 			
 			var master_index: int = AudioServer.get_bus_index("Master")
 			if master_index != -1:

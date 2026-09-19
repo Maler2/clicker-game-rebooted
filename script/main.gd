@@ -29,9 +29,10 @@ func _ready() -> void:
 	print("Main Loaded!")
 	Global.preference_loading()
 	Global.theme_changed.connect(theme_change)
+	bg_color_changed(Global.bg_color)
 
 	theme = Global.get_current_theme()
-	
+
 
 	# start
 	self.scale = Vector2.ZERO
@@ -62,6 +63,7 @@ func _ready() -> void:
 	setting.other_request.connect(open_other)
 	other.close_request_other.connect(close_other)
 	other.apply.connect(theme_change)
+	other.bg_color_request.connect(bg_color_changed)
 
 	# text
 	shop_button.text = "Shop"
@@ -101,7 +103,12 @@ func _process(delta: float) -> void:
 	if bg.position.x <= 0:
 		bg.position.x += speed_scroll * delta
 	else:
-		bg.position.x = -640
+		bg.position.x -= 640.0
+
+	if bg.position.y <= 0:
+		bg.position.y += speed_scroll * delta
+	else:
+		bg.position.y -= 64.0
 
 func theme_change() -> void:
 	theme = Global.get_current_theme()
@@ -125,7 +132,7 @@ func auto_timer_call() -> void:
 		auto_timer.start()
 
 func debug_label_info() -> void:
-	debug_label.text = "Debug\nChance: %.2f\nbg pos: X %d Y %d" % [luck, bg.position.x, bg.position.y]
+	debug_label.text = "Debug\nChance: %.2f\nbg pos: X %.2f Y %.2f\nbg_color: %s" % [luck, bg.position.x, bg.position.y, Global.bg_color.to_html(false)]
 
 # fungsi kustom
 func upd_point() -> void:
@@ -299,3 +306,9 @@ func close_other() -> void:
 	tween.tween_callback(func(): other.visible = false)
 	setting.visible = true
 	tween.tween_property(setting, "position", Vector2(427, 0), 0.4).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+
+func bg_color_changed(color: Color) -> void:
+	var shader_mat = bg.material as ShaderMaterial
+
+	if shader_mat:
+		shader_mat.set_shader_parameter("bg_color", color)

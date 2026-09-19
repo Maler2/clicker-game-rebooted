@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c0ji8v3uit1f2"]
 
 [ext_resource type="Script" uid="uid://l8ac2a0hj00p" path="res://script/main.gd" id="1_itxqv"]
-[ext_resource type="Shader" uid="uid://bscpy2i3rn6qg" path="res://shader/main.gdshader" id="2_b5f6u"]
+[ext_resource type="Shader" uid="uid://c1rdexdj3aql5" path="res://shader/background.tres" id="2_b5f6u"]
 [ext_resource type="Texture2D" uid="uid://dydc4hp3cvdmc" path="res://assets/background/bg.png" id="2_of57s"]
 [ext_resource type="PackedScene" uid="uid://ykklgg2t1gli" path="res://scene/shop.tscn" id="2_v0l8b"]
 [ext_resource type="PackedScene" uid="uid://bccy4xnwv62ap" path="res://scene/menu.tscn" id="3_wp4xf"]
@@ -10,10 +10,10 @@
 [ext_resource type="PackedScene" uid="uid://cu0locohl5tr" path="res://scene/audio.tscn" id="6_4j5ol"]
 [ext_resource type="PackedScene" uid="uid://dfjrcga0fnw8r" path="res://scene/other.tscn" id="8_of57s"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_of57s"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tqoya"]
 shader = ExtResource("2_b5f6u")
-shader_parameter/bg_color = Color(0.5, 0.5, 0.5, 1)
-shader_parameter/color_intensity = 1.0
+shader_parameter/bg_color = Color(1, 1, 1, 1)
+shader_parameter/color_intensity = 0.5
 
 [node name="Main" type="Control" unique_id=54699926]
 layout_mode = 3
@@ -25,19 +25,19 @@ grow_vertical = 2
 script = ExtResource("1_itxqv")
 speed_scroll = 50
 
-[node name="bg" type="TextureRect" parent="." unique_id=1160473517]
+[node name="bg" type="TextureRect" parent="." unique_id=1664884810]
 show_behind_parent = true
-material = SubResource("ShaderMaterial_of57s")
+material = SubResource("ShaderMaterial_tqoya")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -640.0
+offset_top = -360.0
 offset_right = 640.0
+offset_bottom = 360.0
 grow_horizontal = 2
 grow_vertical = 2
-pivot_offset = Vector2(1280, 0)
-mouse_filter = 2
 texture = ExtResource("2_of57s")
 stretch_mode = 1
 

@@ -44,14 +44,32 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "X"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="panel/vboxcontainer" unique_id=616830591]
+[node name="dark_mode" type="HBoxContainer" parent="panel/vboxcontainer" unique_id=616830591]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="panel/vboxcontainer/HBoxContainer" unique_id=833150490]
+[node name="Label" type="Label" parent="panel/vboxcontainer/dark_mode" unique_id=833150490]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Dark Mode:"
 vertical_alignment = 1
 
-[node name="CheckButton" type="CheckButton" parent="panel/vboxcontainer/HBoxContainer" unique_id=904747286]
+[node name="CheckButton" type="CheckButton" parent="panel/vboxcontainer/dark_mode" unique_id=904747286]
 layout_mode = 2
+
+[node name="color_bg" type="HBoxContainer" parent="panel/vboxcontainer" unique_id=997212697]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="panel/vboxcontainer/color_bg" unique_id=1130151529]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "bg color:"
+vertical_alignment = 1
+
+[node name="ColorPicker" type="ColorPicker" parent="panel/vboxcontainer/color_bg" unique_id=1376292995]
+layout_mode = 2
+edit_alpha = false
+edit_intensity = false
+picker_shape = 4
+can_add_swatches = false
+sampler_visible = false
+presets_visible = false
