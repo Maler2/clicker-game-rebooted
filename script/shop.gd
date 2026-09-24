@@ -13,6 +13,8 @@ signal auto_timer_on
 @onready var auto_button: Button = $panel/scrollcontainer/vboxcontainer/auto/button
 @onready var luck_label: Label = $panel/scrollcontainer/vboxcontainer/luck/idlabel
 @onready var luck_button: Button = $panel/scrollcontainer/vboxcontainer/luck/button
+@onready var add_crit_label: Label = $panel/scrollcontainer/vboxcontainer/addcrit/idlabel
+@onready var add_crit_button: Button = $panel/scrollcontainer/vboxcontainer/addcrit/button
 
 # mulai
 func _ready() -> void:
@@ -26,12 +28,14 @@ func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	close_button.pressed.connect(_close_btn_pressed)
 	luck_button.pressed.connect(luck_btn)
+	add_crit_button.pressed.connect(add_crit_btn)
 
 # alternatif dari main.gd
 func upd_point() -> void:
 	add_point_label.text = "Add point: %d" % Global.add_point_cost
 	auto_label.text = "Auto Clicker: %d" % Global.auto_timer_point_cost
 	luck_label.text = "Critical: %d" % Global.luck_cost
+	add_crit_label.text = "Add Crit (more faster speed): %d" % Global.add_crit_bar_cost
 
 # tutup pakai tombol
 func _close_btn_pressed() -> void:
@@ -45,6 +49,9 @@ func _add_point_btn_pressed() -> void:
 		@warning_ignore("narrowing_conversion")
 		Global.add_point_cost *= 1.1
 		upd_point()
+		PopupGlobal.popup("BUYED!")
+	else:
+		PopupGlobal.popup("NOT ENOUGH POINT!")
 
 func auto_button_pressed() -> void:
 	if Global.point >= Global.auto_timer_point_cost:
@@ -55,10 +62,14 @@ func auto_button_pressed() -> void:
 		Global.auto_timer_point_cost *= 1.1
 		
 		upd_point()
+		PopupGlobal.popup("BUYED!")
+	else:
+		PopupGlobal.popup("NOT ENOUGH POINT!")
 
 func luck_btn() -> void:
 	if Global.point >= Global.luck_cost:
 		if Global.luck_float <= Global.luck_float_max:
+			luck_label.text = "Critical: MAXED"
 			PopupGlobal.popup("MAXED!")
 		else:
 			Global.point -= Global.luck_cost
@@ -68,3 +79,21 @@ func luck_btn() -> void:
 			PopupGlobal.popup("BUYED!")
 
 			upd_point()
+	else:
+		PopupGlobal.popup("NOT ENOUGH POINT!")
+
+func add_crit_btn() -> void:
+	if Global.point >= Global.add_crit_bar_cost:
+		if Global.add_crit_bar >= Global.add_crit_bar_max:
+			add_crit_label.text = "Add Crit (more faster speed): MAXED"
+			PopupGlobal.popup("MAXED!")
+		else:
+			Global.point -= Global.add_crit_bar_cost
+			Global.add_crit_bar += 5
+			Global.speed_crit_bar += 3
+			@warning_ignore("narrowing_conversion")
+			Global. add_crit_bar_cost *= 1.1
+			PopupGlobal.popup("BUYED!")
+			upd_point()
+	else:
+		PopupGlobal.popup("NOT ENOUGH POINT!")

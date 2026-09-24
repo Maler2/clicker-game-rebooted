@@ -36,6 +36,26 @@ var luck_cost: int = 100:
 		luck_cost = val
 		update_point.emit()
 
+var speed_crit_bar: int = 10:
+	set(val):
+		speed_crit_bar = val
+		update_point.emit()
+
+var add_crit_bar: int = 5:
+	set(val):
+		add_crit_bar = val
+		update_point.emit()
+
+var add_crit_bar_cost: int = 150:
+	set(val):
+		add_crit_bar_cost = val
+		update_point.emit()
+
+var add_crit_bar_max: int = 30:
+	set(val):
+		add_crit_bar = val
+		update_point.emit()
+
 var luck_float: float = 0.85
 var luck_float_max: float = 0.5
 
@@ -69,7 +89,11 @@ func saving() -> void:
 		"auto_timer_point": auto_timer_point,
 		"auto_timer_point_cost": auto_timer_point_cost,
 		"luck_cost": luck_cost,
-		"luck_float": luck_float
+		"luck_float": luck_float,
+		"speed_crit_bar": speed_crit_bar,
+		"add_crit_bar": add_crit_bar,
+		"add_crit_bar_cost": add_crit_bar_cost,
+		"add_crit_bar_max": add_crit_bar_max
 	}
 
 	var json_string: String = JSON.stringify(data)
@@ -99,6 +123,10 @@ func loading() -> void:
 			auto_timer_point_cost = data.get("auto_timer_point_cost", auto_timer_point_cost)
 			luck_cost = data.get("luck_cost", luck_cost)
 			luck_float = data.get("luck_float", luck_float)
+			speed_crit_bar = data.get("speed_crit_bar", speed_crit_bar)
+			add_crit_bar = data.get("add_crit_bar", add_crit_bar)
+			add_crit_bar_cost = data.get("add_crit_bar_cost", add_crit_bar_cost)
+			add_crit_bar_max = data.get("add_crit_bar_max", add_crit_bar_max)
 			print("Loaded!")
 
 func preference_saving() -> void:

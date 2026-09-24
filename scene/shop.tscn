@@ -14,12 +14,12 @@ script = ExtResource("1_iuafe")
 
 [node name="panel" type="Panel" parent="." unique_id=900110999]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = -1
+anchor_right = 1.3520001
 anchor_bottom = 1.0
 offset_left = 8.0
 offset_top = 8.0
-offset_right = -8.0
+offset_right = -7.968048
 offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -81,5 +81,17 @@ size_flags_horizontal = 3
 text = "placeholder: %any"
 
 [node name="button" type="Button" parent="panel/scrollcontainer/vboxcontainer/luck" unique_id=393604714 groups=["hover"]]
+layout_mode = 2
+text = "BUY"
+
+[node name="addcrit" type="HBoxContainer" parent="panel/scrollcontainer/vboxcontainer" unique_id=121601988]
+layout_mode = 2
+
+[node name="idlabel" type="Label" parent="panel/scrollcontainer/vboxcontainer/addcrit" unique_id=191227521]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "placeholder: %any"
+
+[node name="button" type="Button" parent="panel/scrollcontainer/vboxcontainer/addcrit" unique_id=165816769 groups=["hover"]]
 layout_mode = 2
 text = "BUY"

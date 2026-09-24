@@ -77,3 +77,16 @@ custom_minimum_size = Vector2(0, 128)
 layout_mode = 2
 size_flags_horizontal = 3
 text = "QUIT"
+
+[node name="version" type="HBoxContainer" parent="panel/vboxcontainer" unique_id=919701663]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="label" type="Label" parent="panel/vboxcontainer/version" unique_id=479448139]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "verlabel
+"
+horizontal_alignment = 1
+vertical_alignment = 2

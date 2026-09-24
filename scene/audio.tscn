@@ -39,7 +39,7 @@ size_flags_vertical = 3
 [node name="close" type="HBoxContainer" parent="panel/vboxcontainer" unique_id=86987333]
 layout_mode = 2
 
-[node name="button" type="Button" parent="panel/vboxcontainer/close" unique_id=1831763460]
+[node name="button" type="Button" parent="panel/vboxcontainer/close" unique_id=1831763460 groups=["hover"]]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "X"
